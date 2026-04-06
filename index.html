@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>別當算命師：解鎖業績的底層邏輯 | Infographic</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-dark': '#1A1A2E',    // Dark Navy
+                        'brand-primary': '#16213E', // Midnight Blue
+                        'brand-secondary': '#0F3460', // Deep Blue
+                        'brand-accent': '#E94560',  // Vibrant Red/Pink
+                        'brand-light': '#F2F2F2',   // Off White
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f3f4f6;
+            color: #1a1a2e;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .infographic-section {
+            @apply bg-white rounded-xl shadow-lg p-6 mb-8 border-l-4 border-brand-accent transition-transform hover:-translate-y-1 duration-300;
+        }
+        .section-title {
+            @apply text-2xl md:text-3xl font-bold text-brand-secondary mb-4 flex items-center;
+        }
+        .highlight-text {
+            @apply text-brand-accent font-bold;
+        }
+        
+        /* Print Styles */
+        @media print {
+            .no-print { display: none !important; }
+            body { 
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact; 
+                background-color: white;
+            }
+            .infographic-section {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+                margin-bottom: 20px;
+            }
+            main { display: block; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Floating Print Button -->
+    <button onclick="window.print()" class="no-print fixed bottom-8 right-8 bg-brand-accent text-white px-6 py-3 rounded-full shadow-2xl hover:bg-red-600 transition duration-300 font-bold z-50 flex items-center gap-2 border-2 border-white cursor-pointer hover:scale-105">
+        <span class="text-xl">📥</span> 存成 PDF / 列印
+    </button>
+
+    <!-- Header / Hero Section -->
+    <header class="bg-brand-primary text-white py-12 px-4 shadow-xl">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-4">別當算命師</h1>
+            <h2 class="text-xl md:text-2xl font-light text-gray-300">解鎖業績的底層邏輯：從「預設立場」到「完美呈現」</h2>
+            <div class="mt-8">
+                <span class="inline-block bg-brand-accent text-white px-6 py-2 rounded-full font-bold shadow-lg animate-pulse">
+                    大樹教練觀點
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Section 1: The Problem (Fortune Teller Fallacy) -->
+        <section class="infographic-section md:col-span-2">
+            <h3 class="section-title">
+                <span class="text-4xl mr-3">🔮</span>
+                你是企業家，還是算命師？
+            </h3>
+            <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                在銷售與經營中，我們最大的敵人往往不是市場，而是我們自己的<span class="highlight-text">「假設前提」</span>。許多菁英尚未開口，就已經在心裡幫客戶「判了死刑」。數據顯示，絕大多數的業績瓶頸，都源自於這種無意識的「算命行為」。
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="chart-container">
+                    <canvas id="mindsetChart"></canvas>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <h4 class="font-bold text-brand-secondary mb-2">錯誤的預設 (The Trap)</h4>
+                        <ul class="list-disc list-inside text-gray-600 space-y-2">
+                            <li>「他生意做這麼大，一定不需要我。」</li>
+                            <li>「他上次對我有意見，肯定不會買。」</li>
+                            <li>「現在時機不對，去了也是白去。」</li>
+                        </ul>
+                    </div>
+                    <p class="text-sm text-gray-500 italic">圖表說明：這不僅是數字，更是心態的寫照。80% 的機會在我們開口前，就被自己的負面預設給扼殺了。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Re-framing "Busyness" (Process Flow) -->
+        <section class="infographic-section md:col-span-2">
+            <h3 class="section-title">
+                <span class="text-4xl mr-3">🛑</span>
+                破解「我很忙」的迷思
+            </h3>
+            <p class="text-gray-700 mb-6">
+                當我們聽到潛在夥伴說「我很忙」時，第一反應往往是退縮。然而，從經營者的視角來看，<span class="highlight-text">「忙碌」本身就是最強烈的需求信號</span>。一個忙到無法脫身的領導者，正迫切需要系統化的解救。
+            </p>
+
+            <!-- Custom Flow Diagram using Tailwind Grid/Flex -->
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+                    
+                    <!-- Step 1 -->
+                    <div class="flex-1 w-full p-4 bg-white shadow-md rounded-lg border-t-4 border-gray-400">
+                        <div class="text-3xl mb-2">😫</div>
+                        <h4 class="font-bold text-gray-700">現象：對方很忙</h4>
+                        <p class="text-xs text-gray-500 mt-2">沒時間吃飯、沒時間開會</p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="text-3xl text-gray-400 transform rotate-90 md:rotate-0">⬇</div>
+
+                    <!-- Step 2 (The Shift) -->
+                    <div class="flex-1 w-full p-4 bg-red-50 shadow-md rounded-lg border-t-4 border-red-400 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1">算命師視角</div>
+                        <div class="text-3xl mb-2">🙅‍♂️</div>
+                        <h4 class="font-bold text-red-700">錯誤判斷</h4>
+                        <p class="text-xs text-red-600 mt-2">「不需要我的服務」<br>「不要打擾他」</p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="text-3xl text-brand-accent transform rotate-90 md:rotate-0">⬇</div>
+
+                    <!-- Step 3 (The Insight) -->
+                    <div class="flex-1 w-full p-4 bg-blue-50 shadow-md rounded-lg border-t-4 border-blue-500 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-blue-600 text-white text-xs px-2 py-1">企業家視角</div>
+                        <div class="text-3xl mb-2">🚑</div>
+                        <h4 class="font-bold text-blue-700">真實痛點</h4>
+                        <p class="text-xs text-blue-600 mt-2">事業生病了！<br>急需系統與管理協助</p>
+                    </div>
+
+                </div>
+            </div>
+            <p class="mt-4 text-sm text-gray-500 text-center">
+                不要只看到表面的強大，要看見背後的脆弱。這就是切入點。
+            </p>
+        </section>
+
+        <!-- Section 3: The Engine of Action (Pain vs Pleasure) -->
+        <section class="infographic-section">
+            <h3 class="section-title">
+                <span class="text-4xl mr-3">⚡</span>
+                驅動力的真相
+            </h3>
+            <p class="text-gray-700 mb-4">
+                安東尼羅賓斯指出：人類受兩股力量驅動——<span class="text-blue-600 font-bold">追求快樂</span>與<span class="text-red-600 font-bold">逃離痛苦</span>。
+            </p>
+            <p class="text-gray-700 mb-6 text-sm">
+                回想暑假作業的例子：我們會玩到最後一天才寫，是因為寫作業快樂嗎？不，是因為害怕明天被老師懲罰的「痛苦」。在銷售中，僅僅展示「好處」是不夠的，必須揭示「不改變的代價」。
+            </p>
+            
+            <div class="chart-container">
+                <canvas id="motivationChart"></canvas>
+            </div>
+            <p class="mt-4 text-xs text-gray-500 text-center">
+                高手懂得適度揭示危機（傷口），因為那是讓人立即行動的燃料。
+            </p>
+        </section>
+
+        <!-- Section 4: Mindset Comparison (Radar Chart) -->
+        <section class="infographic-section">
+            <h3 class="section-title">
+                <span class="text-4xl mr-3">🧠</span>
+                思維決定命運
+            </h3>
+            <p class="text-gray-700 mb-4">
+                錯誤的信念像抱著石頭跳海，注定下沉；正確的信念像游泳圈，讓你自然浮起。
+            </p>
+            <p class="text-gray-700 mb-6 text-sm">
+                如果你相信「誠信是最好的招數」，相信「萬事皆有解」，你就不會被恐懼綁架。讓我們比較兩種經營者的核心素質。
+            </p>
+
+            <div class="chart-container">
+                <canvas id="comparisonChart"></canvas>
+            </div>
+            <p class="mt-4 text-xs text-gray-500 text-center">
+                從「預設結果」轉向「專注流程」，你的能力值將全面提升。
+            </p>
+        </section>
+
+        <!-- Section 5: The Call to Action (Steps) -->
+        <section class="infographic-section md:col-span-2 bg-gradient-to-r from-brand-primary to-brand-secondary text-white border-none">
+            <h3 class="text-2xl md:text-3xl font-bold mb-8 text-center text-white">
+                🚀 從現在開始：放下石頭，展現完美
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Action 1 -->
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg border border-white/20 hover:bg-white/20 transition duration-300">
+                    <div class="text-4xl mb-4">🛑</div>
+                    <h4 class="text-xl font-bold mb-2 text-brand-accent">停止算命</h4>
+                    <p class="text-gray-300 text-sm">
+                        不要再猜測對方會不會買。一旦你開始算命，你就失去了行動的勇氣。把判斷的權利還給對方。
+                    </p>
+                </div>
+
+                <!-- Action 2 -->
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg border border-white/20 hover:bg-white/20 transition duration-300">
+                    <div class="text-4xl mb-4">🔍</div>
+                    <h4 class="text-xl font-bold mb-2 text-brand-accent">看見傷口</h4>
+                    <p class="text-gray-300 text-sm">
+                        透過深度對話，找出對方事業中「不盡完善」之處。那個痛點，就是他們需要你存在的理由。
+                    </p>
+                </div>
+
+                <!-- Action 3 -->
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg border border-white/20 hover:bg-white/20 transition duration-300">
+                    <div class="text-4xl mb-4">✨</div>
+                    <h4 class="text-xl font-bold mb-2 text-brand-accent">展現流程</h4>
+                    <p class="text-gray-300 text-sm">
+                        你的責任不是強迫成交，而是把你的服務、會議、系統做到極致的完美呈現。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-brand-dark text-gray-400 py-8 text-center">
+        <p class="text-sm">© 2025 Infographic Design. Based on Big Tree Coach's Insights.</p>
+    </footer>
+
+    <!-- JavaScript for Charts -->
+    <script>
+        // --- Utility Function: Label Wrapping ---
+        function splitLabel(label, maxLength = 16) {
+            if (label.length <= maxLength) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length < maxLength) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // --- Common Chart Options ---
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            } else {
+                                return label;
+                            }
+                        }
+                    },
+                    backgroundColor: 'rgba(26, 26, 46, 0.9)',
+                    titleFont: { size: 14, family: "'Noto Sans TC', sans-serif" },
+                    bodyFont: { size: 13, family: "'Noto Sans TC', sans-serif" },
+                    padding: 12,
+                    cornerRadius: 8,
+                },
+                legend: {
+                    labels: {
+                        font: { family: "'Noto Sans TC', sans-serif", size: 12 },
+                        color: '#333'
+                    }
+                }
+            }
+        };
+
+        // --- Chart 1: Mindset Distribution (Donut) ---
+        const ctxMindset = document.getElementById('mindsetChart').getContext('2d');
+        const mindsetLabel1 = "習慣性算命 (Prejudging)";
+        const mindsetLabel2 = "如實呈現 (Authentic Process)";
+        
+        new Chart(ctxMindset, {
+            type: 'doughnut',
+            data: {
+                labels: [mindsetLabel1, mindsetLabel2], // Short enough, no split needed
+                datasets: [{
+                    data: [80, 20],
+                    backgroundColor: ['#E94560', '#16213E'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: { position: 'bottom' },
+                    title: {
+                        display: true,
+                        text: '銷售行為模式佔比',
+                        font: { size: 16, family: "'Noto Sans TC', sans-serif" },
+                        color: '#1A1A2E'
+                    }
+                }
+            }
+        });
+
+        // --- Chart 2: Motivation Power (Bar) ---
+        const ctxMotivation = document.getElementById('motivationChart').getContext('2d');
+        // Processing labels just in case, though these are short
+        const labelsMotivation = ['追求快樂 (Gain)', '逃離痛苦 (Pain Avoidance)'];
+        const processedLabelsMotivation = labelsMotivation.map(l => splitLabel(l));
+
+        new Chart(ctxMotivation, {
+            type: 'bar',
+            data: {
+                labels: processedLabelsMotivation,
+                datasets: [{
+                    label: '行動驅動力強度 (Motivation Level)',
+                    data: [35, 95], // Conceptual data
+                    backgroundColor: ['#3282B8', '#E94560'],
+                    borderRadius: 8,
+                    barThickness: 50,
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: { color: '#e5e7eb' },
+                        title: { display: true, text: '強度指數' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: '是什麼讓人立即行動？',
+                        font: { size: 16 },
+                        color: '#1A1A2E'
+                    }
+                }
+            }
+        });
+
+        // --- Chart 3: Mindset Comparison (Radar) ---
+        const ctxComparison = document.getElementById('comparisonChart').getContext('2d');
+        const labelsRadar = [
+            '行動力 (Action Taking)', 
+            '抗壓性 (Resilience)', 
+            '客觀判斷 (Objectivity)', 
+            '流程專注 (Process Focus)', 
+            '錯失機會率 (Missed Opps)'
+        ];
+        const processedLabelsRadar = labelsRadar.map(l => splitLabel(l, 14)); // Tighter wrap for radar
+
+        new Chart(ctxComparison, {
+            type: 'radar',
+            data: {
+                labels: processedLabelsRadar,
+                datasets: [{
+                    label: '算命師心態 (The Fortune Teller)',
+                    data: [20, 30, 10, 20, 90], // Low action, high missed opps
+                    fill: true,
+                    backgroundColor: 'rgba(233, 69, 96, 0.2)',
+                    borderColor: '#E94560',
+                    pointBackgroundColor: '#E94560',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#E94560'
+                }, {
+                    label: '企業家心態 (The Entrepreneur)',
+                    data: [90, 85, 95, 90, 10], // High action, low missed opps
+                    fill: true,
+                    backgroundColor: 'rgba(22, 33, 62, 0.2)',
+                    borderColor: '#16213E',
+                    pointBackgroundColor: '#16213E',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#16213E'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                elements: {
+                    line: { borderWidth: 3 }
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: '#e5e7eb' },
+                        grid: { color: '#e5e7eb' },
+                        pointLabels: {
+                            font: { size: 11, family: "'Noto Sans TC', sans-serif" },
+                            color: '#4b5563'
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                },
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: { position: 'top' }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
